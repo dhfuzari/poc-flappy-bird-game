@@ -132,4 +132,38 @@ function ConstructPipes(heightArea, widthArea, slot, space, notifyCrossedCenter)
 //     constructPipes.animate();
 // }, 20);
 
+function Bird(heightArea) {
+    let flying = false;
+
+    this.element = newElement('img', 'bird');
+    this.element.src = './imgs/bird.png';
+
+    this.getYAxis = () => parseInt(this.element.style.bottom.split('px')[0]);
+    this.setYAxis = (yAxis) => this.element.style.bottom = `${yAxis}px`;
+
+    window.onkeydown = e => flying = true;
+    window.onkeyup = e => flying = false;
+
+    this.animate = () => {
+        const newYAxis = this.getYAxis() + (flying ? 8 : -4);
+        const maxHeightBirdCanFly = heightArea - this.element.clientHeight;
+
+        if (newYAxis <= 0) { this.setYAxis(0); }
+        else if (newYAxis >= maxHeightBirdCanFly) { this.setYAxis(maxHeightBirdCanFly); }
+        else { this.setYAxis(newYAxis); }
+    }
+
+    this.setYAxis(heightArea / 2);
+}
+// how to use it:
+const bird = new Bird(500);
+const constructPipes = new ConstructPipes(500, 900, 200, 400, () => { });
+const gameArea = document.querySelector('[wm-flappy]');
+gameArea.appendChild(bird.element);
+constructPipes.parsOfPipes.forEach(parOfPipe => gameArea.appendChild(parOfPipe.element));
+setInterval(() => {
+    constructPipes.animate();
+    bird.animate();
+}, 40);
+
 
