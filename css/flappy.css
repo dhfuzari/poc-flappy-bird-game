@@ -10,8 +10,8 @@
 [wm-flappy] {
     position: relative;
     border: 5px solid dodgerblue;
-    height: 700px;
-    width: 1200px;
+    height: 500px;
+    width: 900px;
     margin: 15px;
     background-color: deepskyblue;
     overflow: hidden;
