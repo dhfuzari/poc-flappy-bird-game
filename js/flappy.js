@@ -198,3 +198,34 @@ function Progress() {
 //     bird.animate();
 // }, 30);
 
+
+/** @function
+ * @name overlappingElements
+ * @description A function to check if two elements occupy the same space
+ * @return {bool} horizontal && vertical 
+ */
+function overlappingElements(elementX, elementY) {
+    const x = elementX.getBoundingClientRect();
+    const y = elementY.getBoundingClientRect();
+    const horizontal = x.left + x.width >= y.left && y.left + y.width >= x.left;
+    const vertical = x.top + x.height >= y.top && y.top + y.height >= x.top;
+    return horizontal && vertical;
+}
+
+/** @function
+ * @name collisionTest
+ * @description A function to test if bird element collided with any Pipe element
+ * @return {bool} collided
+ */
+function collisionTest(bird, pipes) {
+    let collided = false;
+    pipes.parsOfPipes.forEach((parOfPipe) => {
+        if (!collided) {
+            const superior = parOfPipe.superior.element;
+            const inferior = parOfPipe.inferior.element;
+            collided = overlappingElements(bird.element, superior)
+                || overlappingElements(bird.element, inferior);
+        }
+    });
+    return collided;
+}
