@@ -1,7 +1,7 @@
 /** @function
  * @name newElement 
  * @description Creates a new element with a class name - tagName.className
- * @param {string} tagName 
+ * @param {string} tagName
  * @param {string} className 
  * @return {Object} elem
  */
@@ -119,7 +119,6 @@ function ConstructPipes(heightArea, widthArea, slot, space, notifyCrossedCenter)
 
             const middle = widthArea / 2;
             const crossedMiddleOfGameArea = par.getXAxis() + displacement >= middle && par.getXAxis() < middle;
-
             crossedMiddleOfGameArea && notifyCrossedCenter()
         });
     }
@@ -132,6 +131,13 @@ function ConstructPipes(heightArea, widthArea, slot, space, notifyCrossedCenter)
 //     constructPipes.animate();
 // }, 20);
 
+
+/** @function
+ * @name Bird
+ * @description A constructor function wich creates and animates a new Bird element
+ * @param {number} heightArea The height of screen(or game area)
+ * @return {undefined} undefined - Constructor function
+ */
 function Bird(heightArea) {
     let flying = false;
 
@@ -145,7 +151,7 @@ function Bird(heightArea) {
     window.onkeyup = e => flying = false;
 
     this.animate = () => {
-        const newYAxis = this.getYAxis() + (flying ? 8 : -4);
+        const newYAxis = this.getYAxis() + (flying ? 7 : -4); // 8: -5
         const maxHeightBirdCanFly = heightArea - this.element.clientHeight;
 
         if (newYAxis <= 0) { this.setYAxis(0); }
@@ -156,14 +162,39 @@ function Bird(heightArea) {
     this.setYAxis(heightArea / 2);
 }
 // how to use it:
-const bird = new Bird(500);
-const constructPipes = new ConstructPipes(500, 900, 200, 400, () => { });
-const gameArea = document.querySelector('[wm-flappy]');
-gameArea.appendChild(bird.element);
-constructPipes.parsOfPipes.forEach(parOfPipe => gameArea.appendChild(parOfPipe.element));
-setInterval(() => {
-    constructPipes.animate();
-    bird.animate();
-}, 40);
+// const bird = new Bird(500);
+// const constructPipes = new ConstructPipes(500, 900, 200, 400, () => { });
+// const gameArea = document.querySelector('[wm-flappy]');
+// gameArea.appendChild(bird.element);
+// constructPipes.parsOfPipes.forEach(parOfPipe => gameArea.appendChild(parOfPipe.element));
+// setInterval(() => {
+//     constructPipes.animate();
+//     bird.animate();
+// }, 30);
 
+
+/** @function
+ * @name Progress
+ * @description A constructor function wich creates a Progress element to count the score
+ * @return {undefined} undefined - Constructor function
+ */
+function Progress() {
+    this.element = newElement('span', 'progress');
+    this.updateGameScore = score => {
+        this.element.innerHTML = score;
+    }
+    this.updateGameScore(0);
+}
+// how to use it:
+// const bird = new Bird(500);
+// const progress = new Progress();
+// const constructPipes = new ConstructPipes(500, 900, 200, 400, () => { });
+// const gameArea = document.querySelector('[wm-flappy]');
+// gameArea.appendChild(bird.element);
+// gameArea.appendChild(progress.element);
+// constructPipes.parsOfPipes.forEach(parOfPipe => gameArea.appendChild(parOfPipe.element));
+// setInterval(() => {
+//     constructPipes.animate();
+//     bird.animate();
+// }, 30);
 
