@@ -229,3 +229,34 @@ function collisionTest(bird, pipes) {
     });
     return collided;
 }
+
+/** @function
+ * @name FlappyBird
+ * @description A constructor function wich creates all game structure and starts it
+ * @return {undefined} undefined - Constructor function
+ */
+function FlappyBird() {
+    let score = 0;
+    const gameArea = document.querySelector('[wm-flappy]');
+    const heightArea = gameArea.clientHeight;
+    const widthArea = gameArea.clientWidth;
+    const progress = new Progress();
+    const constructPipes = new ConstructPipes(heightArea, widthArea, 200, 400, () => {
+        progress.updateGameScore(++score);
+    });
+    const bird = new Bird(heightArea);
+    gameArea.appendChild(progress.element);
+    gameArea.appendChild(bird.element);
+    constructPipes.parsOfPipes.forEach(parOfPipe => gameArea.appendChild(parOfPipe.element));
+
+    this.start = () => {
+        const timer = setInterval(() => {
+            constructPipes.animate();
+            bird.animate();
+
+            if (collisionTest(bird, constructPipes)) clearInterval(timer);
+        }, 20)
+    }
+}
+
+new FlappyBird().start();
