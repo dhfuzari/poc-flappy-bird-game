@@ -1,20 +1,20 @@
 @font-face {
-    font-family: 'Oswald';
-    src: url('../fonts/Oswald-Regular.ttf') format('truetype');
+  font-family: 'Oswald';
+  src: url('../fonts/Oswald-Regular.ttf') format('truetype');
 }
 @font-face {
-    font-family: 'Pixel';
-    src: url('../fonts/Pixel.ttf');
+  font-family: 'Pixel';
+  src: url('../fonts/Pixel.ttf');
 }
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 html, body {
-    height: 100%;
+  height: 100%;
 }
 body {
-    font-family: 'Oswald', sans-serif;
-    margin: 0;
-    background-color: #0D262D;
-    color: #fff;
+  font-family: 'Oswald', sans-serif;
+  margin: 0;
+  background-color: #0D262D;
+  color: #fff;
 }
